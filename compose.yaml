@@ -14,6 +14,7 @@ services:
     volumes:
       - ./init-scripts:/docker-entrypoint-initdb.d
       - ${POSTGRES_DATA_DIR}:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - backend
     command: [ "postgres", "-c", "listen_addresses=*" ]
@@ -43,3 +44,7 @@ networks:
     driver: bridge
   frontend:
     driver: bridge
+
+
+volumes:
+  postgres-data:
