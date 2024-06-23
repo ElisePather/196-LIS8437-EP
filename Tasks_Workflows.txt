@@ -59,8 +59,9 @@ Planned next steps to be taken -
 3. Create clean up function to delete files from dev_data folder after pushed back to XNAT
 
 Issues - 
-- unable to push to XNAT using xnatpy import_ method, mimic method used in project setup
-steps for proposed method 
+- unable to push to XNAT using xnatpy import_ method
+Proposed Solution - 
+mimic method used in project setup steps for proposed method 
 
 Proposed changes to workflow given issues -
 1. Create function to change (0010,4000) to new session value 
