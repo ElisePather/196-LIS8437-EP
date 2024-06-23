@@ -54,9 +54,10 @@ Planned coding workflow -
 	5.3 Save each DICOM file to new folder maintain the same folder structure as original session
 
 Planned next steps to be taken - 
-1. Push to XNAT using python XNAT import_ 
-2. Refactor new session folder construction to function reconfigure_subject_session  
-3. Create clean up function to delete files from dev_data folder after pushed back to XNAT
+1. zip new session folder 
+2. Push to XNAT using python XNAT import_ 
+3. Refactor new session folder construction to function reconfigure_subject_session  
+4. Create clean up function to delete files from dev_data folder after pushed back to XNAT
 
 Issues - 
 - unable to push to XNAT using xnatpy import_ method
