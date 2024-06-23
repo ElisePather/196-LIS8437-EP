@@ -1,0 +1,76 @@
+Setup -
+My PC is windows so had to work in wsl terminal during dev to be compatible with dcmtk 
+
+Docker Build
+Issues - permissions error on /var/lib/postgresql/data
+Solved - adding as a volume outside the services 
+Occurred on both docker builds
+
+Tasks -
+0. change .gitignore 
+Issues - 
+Given I was working in wsl, when trying to remove venv from .gitignore, I had an OS compatibility error 
+"warning: in the working copy of 'venv/bin/activate', LF will be replaced by CRLF the next time Git touches it"   
+Due to the venv file setup being in a Linux folder structure
+
+1. SQL Query
+Steps taken -
+1. setup csc db in pgadmin on web interface
+2. select query on radiology.report, joining patient.demographics and radiology.order_tbl on primary keys to avoid duplication and  the applying where conditions
+
+Extension to python script - 
+1. connect to db using psycopg2
+2. open connection with conn.cursor
+3. set query variable
+4. execute query cursor.execute(query)
+5. fetch query result cursor.fetchall()
+6. save results
+
+2. Process data from XNAT
+Full task was not completed within the 4 hour time limit
+
+Data flow 
+1. Pull subject from XNAT
+2. Download subject files 
+3. loop over DICOM files completed processing 
+4. create new session folder within subject folder
+5. save new DICOM files to new session folder 
+6. push subject back to XNAT with new session
+
+Dataflow completed up to step 5 within time limit
+
+Code explanation -
+
+Packages used - xnat, pydicom, os
+
+Planned coding workflow -
+1. Use XNAT python package to connect to XNAT web
+2. select project
+3. select subject (chosen subject = 'GSTT000030')
+4. download subject directory
+5. loop over files in directory
+	5.1 apply functions add_day_to_tags, remove_tag_val, change_study_desc to DICOM files 
+	5.2 Create new folder with SessionA as session value within subject folder
+	5.3 Save each DICOM file to new folder maintain the same folder structure as original session
+
+Planned next steps to be taken - 
+1. Push to XNAT using python XNAT import_ 
+2. Refactor new session folder construction to function reconfigure_subject_session  
+3. Create clean up function to delete files from dev_data folder after pushed back to XNAT
+
+Issues - 
+- unable to push to XNAT using xnatpy import_ method, mimic method used in project setup
+steps for proposed method 
+
+Proposed changes to workflow given issues -
+1. Create function to change (0010,4000) to new session value 
+2. During DICOM processing loop use new function to change (0010,4000) for all DICOM values  
+3. Push using 'storescu +sd -r -aec XNAT localhost 8104 {directory_path}' command
+
+ 
+
+3. Add orthanc as service to docker_compose.yml file 
+
+To do this I followed the instructions on the https://orthanc.uclouvain.be/book/users/docker.html 
+
+
