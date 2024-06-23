@@ -60,7 +60,7 @@ Planned next steps to be taken -
 4. Create clean up function to delete files from dev_data folder after pushed back to XNAT
 
 Issues - 
-- unable to push to XNAT using xnatpy import_ method
+Issue 1. unable to push to XNAT using xnatpy import_ method
 Proposed Solution - 
 mimic method used in project setup steps for proposed method 
 
@@ -69,10 +69,12 @@ Proposed changes to workflow given issues -
 2. During DICOM processing loop use new function to change (0010,4000) for all DICOM values  
 3. Push using 'storescu +sd -r -aec XNAT localhost 8104 {directory_path}' command
 
- 
+Issue 2. Change date method (add_day_to_tags) give correct date format value e.g. rather than adding 11 change the date to adding 11 days
+Proposed solution -  
+Use datetime to allow for correct day addition rather than changing str value to int   
+	
 
 3. Add orthanc as service to docker_compose.yml file 
 
 To do this I followed the instructions on the https://orthanc.uclouvain.be/book/users/docker.html 
-
 
